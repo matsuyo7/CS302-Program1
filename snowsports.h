@@ -7,6 +7,10 @@
 //or if there was an obstacle in the way, or how much energy the racer has. The program will determine numbers
 //based on these events, and in the end will give a score which determines who wins based on the higher score.
 
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
 class SnowSport
 {
@@ -14,12 +18,13 @@ class SnowSport
 		SnowSport();					//initializes data
 		SnowSport(const char * & your_name);		//asks for the user's name
 		void display() const;				//displays the name
-		void start();					//start the race
-		void stop();					//stop the race
+		void startrace();					//start the race
+		void stoprace();					//stop the race
+		int tallypoints();
 
 	protected:
-		char * their_name;
-}
+		char * name;
+};
 
 class IceSkate: public SnowSport
 {
@@ -27,15 +32,17 @@ class IceSkate: public SnowSport
 		IceSkate();					//initializes data
 		IceSkate(const char * & your_name, const char * & skill_level);	//takes in the user's name and skill level to help determine speed
 		void display() const;	
-		int push();					//push the skates to start the race
 		int energy();					//how much energy the skater has until exhausted
 		int jump();					//jump to avoid obstacles
-		int stop_skate();				//the end of the race
+
 	
 	protected:
 		char * your_skill;
 		int your_speed;
-}
+
+	private:
+		IceSkate * next;
+};
 
 class Ski: public SnowSport
 {
@@ -43,15 +50,16 @@ class Ski: public SnowSport
 		Ski();
 		Ski(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
 		void display() const;
-		int push();					//push the skis to start the race
 		int energy();					//how much energy the skiier has until exhausted
 		int do_flip();					//user flips to avoid obstacle and gain speed
-		int stop_ski();					//end of race
 
 	protected:
-		int your_skill;
-		int your_speed;
-}
+		int skill;
+		int speed;
+
+	private:
+		Ski * next;
+};
 
 class SnowBoard: public SnowSport
 {
@@ -65,40 +73,10 @@ class SnowBoard: public SnowSport
 		int stop_board();				//end the race
 
 	protected:
-		int your_skill;
-		int your_speed;
-}
+		int skill;
+		int speed;
 
-class SkateNode: public IceSkate
-{
-	public:
-		SkateNode();
-		SkateNode(const char * & your name, const char * & skill_level);
-		void set_next(SkateNode * add_next);
-
-	proteted:
-		SkateNode * next;
-}
-
-class SkiNode: public Ski
-{
-	public:
-		SkiNode();
-		SkiNode(const char * & your name, const char * & skill_level);
-		void set_next(SkiNode * add_next);
-
-	proteted:
-		SkiNode * next;
-}
-
-class BoardNode: public SnowBoard
-{
-	public:
-		BoardNode();
-		BoardNode(const char * & your name, const char * & skill_level);
-		void set_next(BoardNode * add_next);
-
-	proteted:
-		BoardNode * next;
-}
+	private:
+		SnowBoard * next;
+};
 
