@@ -8,3 +8,13 @@
 
 
 #include "snowsports.h"
+
+int main()
+{
+
+
+
+
+
+	return 0;
+}

@@ -40,8 +40,6 @@ class IceSkate: public SnowSport
 		char * your_skill;
 		int your_speed;
 
-	private:
-		IceSkate * next;
 };
 
 class Ski: public SnowSport
@@ -57,8 +55,6 @@ class Ski: public SnowSport
 		int skill;
 		int speed;
 
-	private:
-		Ski * next;
 };
 
 class SnowBoard: public SnowSport
@@ -75,8 +71,5 @@ class SnowBoard: public SnowSport
 	protected:
 		int skill;
 		int speed;
-
-	private:
-		SnowBoard * next;
 };
 
