@@ -15,7 +15,8 @@ class SkateNode: public IceSkate
 	public:
 		SkateNode();					//initializes data
 		SkateNode(const char * & your_name, const char * & skill_level);	//takes in the user's name and skill level to help determine speed
-		void display() const;	
+		~SkateNode();
+		int display();	
 		int energy();					//how much energy the skater has until exhausted
 		int jump();					//jump to avoid obstacles
 
@@ -28,7 +29,8 @@ class SkiNode: public Ski
 	public:
 		SkiNode();
 		SkiNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		void display() const;
+		~SkiNode();
+		int display();
 		int energy();					//how much energy the skiier has until exhausted
 		int do_flip();					//user flips to avoid obstacle and gain speed
 
@@ -41,7 +43,8 @@ class BoardNode: public SnowBoard
 	public:
 		BoardNode();
 		BoardNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		void display() const;
+		~BoardNode();
+		int display();
 		int push();					//push the board to start
 		int do_flip();					//flip to avoid objects and increase speed
 		int jump();					//jump to avoid obstacles
@@ -51,34 +54,38 @@ class BoardNode: public SnowBoard
 		BoardNode * next;
 };
 
-class SkateLLL: public SkateNode
+class SkateLLL
 {
 	public:
 		SkateLLL();
 		~SkateLLL();
-		void set_next(SkateLLL * add_next);
+		int display();
+		int insert();
+		int remove();
 
 	private:
 		SkateNode * head;
 };
 
-class SkiCLL: public SkiNode
+class SkiCLL
 {
 	public:
 		SkiCLL();
 		~SkCLL();
-		void set_next(SkiCLL * add_next);
+		int display();
+		int insert();
+		int remove();
 
 	private:
 		SkiNode * head;
 };
 
-class BoardVector: public BoardNode
+class BoardVector
 {
 	public:
 		BoardVector();
 		~BoardVector();
-		void set_next(BoardList * add_next);
+		int display();
 
 	private:
 		vector<SnowBoard> BoardList;

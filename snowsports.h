@@ -17,10 +17,11 @@ class SnowSport
 	public:
 		SnowSport();					//initializes data
 		SnowSport(const char * & your_name);		//asks for the user's name
-		void display() const;				//displays the name
-		void startrace();					//start the race
-		void stoprace();					//stop the race
-		int tallypoints();
+		~SnowSport();					//destructor
+		int display();					//displays the name
+		int startrace();				//start the race
+		int stoprace();					//stop the race
+		int tallypoints();				//keep track of points
 
 	protected:
 		char * name;
@@ -29,11 +30,12 @@ class SnowSport
 class IceSkate: public SnowSport
 {
 	public:
-		IceSkate();					//initializes data
-		IceSkate(const char * & your_name, const char * & skill_level);	//takes in the user's name and skill level to help determine speed
-		void display() const;	
-		int energy();					//how much energy the skater has until exhausted
-		int jump();					//jump to avoid obstacles
+		IceSkate();							//initializes data
+		IceSkate(const char * & your_name, const int & skill_level);	//takes in the user's name and skill level to help determine speed
+		~IceSkate();
+		int display();	
+		int energy();							//how much energy the skater has until exhausted
+		int jump();							//jump to avoid obstacles
 
 	
 	protected:
@@ -45,11 +47,12 @@ class IceSkate: public SnowSport
 class Ski: public SnowSport
 {
 	public:
-		Ski();
+		Ski();							//constructor
 		Ski(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		void display() const;
-		int energy();					//how much energy the skiier has until exhausted
-		int do_flip();					//user flips to avoid obstacle and gain speed
+		~Ski();							//destructor
+		int display();						//displays information
+		int energy();						//how much energy the skiier has until exhausted
+		int do_flip();						//user flips to avoid obstacle and gain speed
 
 	protected:
 		int skill;
@@ -62,7 +65,8 @@ class SnowBoard: public SnowSport
 	public:
 		SnowBoard();
 		SnowBoard(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		void display() const;
+		~SnowBoard();
+		int display();
 		int push();					//push the board to start
 		int do_flip();					//flip to avoid objects and increase speed
 		int jump();					//jump to avoid obstacles

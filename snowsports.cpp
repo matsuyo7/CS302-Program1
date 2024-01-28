@@ -8,5 +8,33 @@
 
 #include "snowsports.h"
 
+//initialization list
+SnowSport::SnowSport(const char * & your_name): name(your_name)
+{
+}
 
+//destructor
+SnowSport::~SnowSport()
+{
+}
+
+//Displays a race
+int SnowSport::display()
+{
+}
+
+//start the race
+int SnowSport::startrace()
+{
+}
+
+//stops the race and ends the points
+int SnowSport::stoprace()
+{
+}
+
+//Calculates the points in the end
+int SnowSport::tallypoints()
+{
+}
 
