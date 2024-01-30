@@ -44,7 +44,7 @@ class BoardNode: public SnowBoard
 		BoardNode();
 		BoardNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
 		~BoardNode();
-		int display();
+		int display() const;
 		int push();					//push the board to start
 		int do_flip();					//flip to avoid objects and increase speed
 		int jump();					//jump to avoid obstacles
@@ -59,7 +59,9 @@ class SkateLLL
 	public:
 		SkateLLL();
 		~SkateLLL();
-		int display();
+		SkateLLL(const SkateLLL & to_copy);
+		SkateLLL & operator=(const SkateLLL & src);
+		int display() const;
 		int insert();
 		int remove();
 		int retrieve();
@@ -74,7 +76,9 @@ class SkiCLL
 	public:
 		SkiCLL();
 		~SkCLL();
-		int display();
+		SkiCLL(const SkiCLL & to_copy);
+		SkiCLL & operator=(const SkiCLL & src);
+		int display() const;
 		int insert();
 		int remove();
 		int retrieve();
@@ -89,7 +93,7 @@ class BoardVector
 	public:
 		BoardVector();
 		~BoardVector();
-		int display();
+		int display() const;
 
 	private:
 		vector<SnowBoard> BoardList;

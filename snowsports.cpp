@@ -8,9 +8,16 @@
 
 #include "snowsports.h"
 
-//initialization list
-SnowSport::SnowSport(char * & your_name): name(your_name)
+//default constructor
+SnowSport::SnowSport()
 {
+}
+
+//copy constructor
+SnowSport::SnowSport(const SnowSport & to_copy)
+{
+	name = new char [strlen(to_copy.name) + 1];
+	strcpy(name, to_copy.name);
 }
 
 //destructor
@@ -18,11 +25,34 @@ SnowSport::~SnowSport()
 {
 }
 
-//Displays a race
-int SnowSport::display()
+//assignment operator
+SnowSport & SnowSport::operator=(const SnowSport & src)
 {
+	if (this == &src)
+	{
+		delete[] name;
+		name = new char [strlen(src.name) + 1];
+		strcpy(name, src.name);
+	}
+	return *this;
+
+}
+//Get the name of the plauer
+int SnowSport::get_name(char * & add_name)
+{
+	if (!add_name)
+		return 0;
+	strcpy(name, add_name);
+	return 1;
 }
 
+//Displays a race
+int SnowSport::display() const
+{
+	cout << name << endl;
+	return 1;
+}
+/*
 //start the race
 int SnowSport::startrace()
 {
@@ -37,4 +67,4 @@ int SnowSport::stoprace()
 int SnowSport::tallypoints()
 {
 }
-
+*/

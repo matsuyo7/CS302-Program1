@@ -10,15 +10,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstring>
 using namespace std;
+
+const int SIZE {200};
 
 class SnowSport
 {
 	public:
-		SnowSport();					//initializes data
-		SnowSport(char * & your_name);		//asks for the user's name
+		SnowSport();					//default constructor
+		SnowSport(const SnowSport & to_copy);		//copy constructor
 		~SnowSport();					//destructor
-		int display();					//displays the name
+		SnowSport & operator=(const SnowSport & src);	//assignment operator
+		int get_name(char * & add_name);
+		int display() const;				//displays the name
 		int startrace();				//start the race
 		int stoprace();					//stop the race
 		int tallypoints();				//keep track of points
@@ -33,7 +38,7 @@ class IceSkate: public SnowSport
 		IceSkate();							//initializes data
 		IceSkate(const char * & your_name, const int & skill_level);	//takes in the user's name and skill level to help determine speed
 		~IceSkate();
-		int display();	
+		int display() const;	
 		int energy();							//how much energy the skater has until exhausted
 		int jump();							//jump to avoid obstacles
 
@@ -50,7 +55,7 @@ class Ski: public SnowSport
 		Ski();							//constructor
 		Ski(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
 		~Ski();							//destructor
-		int display();						//displays information
+		int display() const;						//displays information
 		int energy();						//how much energy the skiier has until exhausted
 		int do_flip();						//user flips to avoid obstacle and gain speed
 
@@ -66,13 +71,16 @@ class SnowBoard: public SnowSport
 		SnowBoard();
 		SnowBoard(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
 		~SnowBoard();
-		int display();
+		SnowBoard(const SnowBoard & to_copy);
+		SnowBoard & operator=(const SnowBoard & src);
+		int display() const;
 		int push();					//push the board to start
 		int do_flip();					//flip to avoid objects and increase speed
 		int jump();					//jump to avoid obstacles
 		int stop_board();				//end the race
 
 	protected:
+		char * color;
 		int skill;
 		int speed;
 };
@@ -80,4 +88,5 @@ class SnowBoard: public SnowSport
 
 //Prototypes
 int menu();
-void get_info();
+void add_racer_name(SnowSport & to_add, char add_name[]);
+void display_racer(SnowSport & to_display);
