@@ -16,7 +16,7 @@ class SnowSport
 {
 	public:
 		SnowSport();					//initializes data
-		SnowSport(const char * & your_name);		//asks for the user's name
+		SnowSport(char * & your_name);		//asks for the user's name
 		~SnowSport();					//destructor
 		int display();					//displays the name
 		int startrace();				//start the race
@@ -77,3 +77,7 @@ class SnowBoard: public SnowSport
 		int speed;
 };
 
+
+//Prototypes
+int menu();
+void get_info();

@@ -62,6 +62,8 @@ class SkateLLL
 		int display();
 		int insert();
 		int remove();
+		int retrieve();
+		int removeall();
 
 	private:
 		SkateNode * head;
@@ -75,6 +77,8 @@ class SkiCLL
 		int display();
 		int insert();
 		int remove();
+		int retrieve();
+		int removeall();
 
 	private:
 		SkiNode * head;

@@ -9,7 +9,7 @@
 #include "snowsports.h"
 
 //initialization list
-SnowSport::SnowSport(const char * & your_name): name(your_name)
+SnowSport::SnowSport(char * & your_name): name(your_name)
 {
 }
 

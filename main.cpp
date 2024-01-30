@@ -11,10 +11,47 @@
 
 int main()
 {
+	//Variables
+	int option {0};
 
+	option = menu();
+	do
+	{
+		if (option == 1)
+		{
+		}
+		else if (option == 2)
+		{
+		}
+		else if (option == 3)
+		{
+		}
+	} while (option != 4);
 
-
+	cout << "\n***Exiting program" << endl;
 
 
 	return 0;
 }
+
+//Menu for the user to choose their sport from. Given three options for sports
+int menu()
+{
+	int option;
+	cout << "\n\n***SnowSports Racer***"
+		"\nChoose a sport you want to race in:"
+		"\n\t1. Ice Skating"
+		"\n\t2. Skiing"
+		"\n\t3. Snow Boarding"
+		"\n\t4. Exit";
+	do
+	{
+		cout << "\nPick an option: ";
+		cin >> option;
+		cin.ignore(100,'\n');
+		if (option < 1 || option > 4)
+			cout << "\nTry again" << endl;
+	} while (option < 1 || option > 4);
+	return option;
+}
+
