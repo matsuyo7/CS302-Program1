@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <cstring>
+#include <cstdlib>
 using namespace std;
 
 const int SIZE {200};

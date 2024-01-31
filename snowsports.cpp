@@ -23,6 +23,9 @@ SnowSport::SnowSport(const SnowSport & to_copy)
 //destructor
 SnowSport::~SnowSport()
 {
+	if (name)
+		delete[] name;
+	name = nullptr;
 }
 
 //assignment operator
@@ -42,6 +45,7 @@ int SnowSport::get_name(char * & add_name)
 {
 	if (!add_name)
 		return 0;
+	name = new char[strlen(add_name)+1];
 	strcpy(name, add_name);
 	return 1;
 }

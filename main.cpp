@@ -68,7 +68,7 @@ void add_racer_name(SnowSport & to_add, char add_name[])
 {
 	cout << "\nName: ";
 	cin.get(add_name, SIZE, '\n');
-	to_add.get_name(add_name);
+	SnowSport * sport = new SnowSport(add_name);
 }
 
 void display_racer(SnowSport & to_display)
