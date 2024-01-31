@@ -14,10 +14,12 @@ SnowSport::SnowSport()
 }
 
 //copy constructor
-SnowSport::SnowSport(const SnowSport & to_copy)
+SnowSport::SnowSport(char * new_name, int & your_skill): name(nullptr), skill(your_skill)
 {
-	name = new char [strlen(to_copy.name) + 1];
-	strcpy(name, to_copy.name);
+	skill = 0;
+	name = new char [strlen(new_name) + 1];
+	strcpy(name, new_name);
+	point = 0;
 }
 
 //destructor
@@ -26,10 +28,11 @@ SnowSport::~SnowSport()
 	if (name)
 		delete[] name;
 	name = nullptr;
+	skill = 0;
 }
 
 //assignment operator
-SnowSport & SnowSport::operator=(const SnowSport & src)
+/*SnowSport & SnowSport::operator=(const SnowSport & src)
 {
 	if (this == &src)
 	{
@@ -39,21 +42,26 @@ SnowSport & SnowSport::operator=(const SnowSport & src)
 	}
 	return *this;
 
-}
+}*/
 //Get the name of the plauer
-int SnowSport::get_name(char * & add_name)
+int SnowSport::racer_info(char * add_name, int & your_skill)
 {
 	if (!add_name)
 		return 0;
-	name = new char[strlen(add_name)+1];
+	name = new char[strlen(add_name) + 1];
 	strcpy(name, add_name);
+	skill = your_skill;
+
 	return 1;
 }
 
 //Displays a race
 int SnowSport::display() const
 {
-	cout << name << endl;
+	if (!name || !skill)
+		return 0;
+	cout << "\nPlayer: " << name << endl;
+	cout << "\nSkill level: " << skill << endl;
 	return 1;
 }
 /*
@@ -72,3 +80,18 @@ int SnowSport::tallypoints()
 {
 }
 */
+
+IceSkate::IceSkate()
+{
+}
+//takes in the user's name and skill level to help determine speed
+IceSkate::IceSkate(char * your_name, const int & skill_level): SnowSport(your_name, skill_level)
+{
+}
+
+int IceSkate::display() const
+{
+	SnowSport::display();
+	return 1;
+}
+

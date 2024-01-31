@@ -7,7 +7,7 @@
 //or if there was an obstacle in the way, or how much energy the racer has. The program will determine numbers
 //based on these events, and in the end will give a score which determines who wins based on the higher score.
 
-#include "snowsports.h"
+//#include "snowsports.h"
 
 
 class SkateNode: public IceSkate
