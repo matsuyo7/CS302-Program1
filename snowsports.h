@@ -25,14 +25,12 @@ class SnowSport
 		//SnowSport & operator=(const SnowSport & src);	//assignment operator
 		int racer_info(char * add_name, int & your_skill);
 		int display() const;				//displays the name
-		int startrace();				//start the race
+		int startrace(int add_skill);				//start the race and add a timer
 		int stoprace();					//stop the race
-		int tallypoints();				//keep track of points
 
 	protected:
 		char * name;
 		int skill;
-		int points;
 
 };
 
@@ -40,16 +38,18 @@ class IceSkate: public SnowSport
 {
 	public:
 		IceSkate();							//initializes data
-		IceSkate(const char * your_name, const int & skill_level);	//takes in the user's name and skill level to help determine speed
+		IceSkate(char * your_name, int & skill_level);	//takes in the user's name and skill level to help determine speed
 		~IceSkate();
 		int display() const;	
 		int energy();							//how much energy the skater has until exhausted
 		int jump();							//jump to avoid obstacles
-		int slipped();
+		int slipped();					//takes points away if racer slipped
+		int tallypoints();				//keep track of points
 
 	
 	protected:
-		int your_speed;
+		int points;
+		int speed;
 
 };
 
@@ -63,9 +63,10 @@ class Ski: public SnowSport
 		int energy();						//how much energy the skiier has until exhausted
 		int do_flip();						//user flips to avoid obstacle and gain speed
 		int lost_stick();
+		int tallypoints();				//keep track of points
 
 	protected:
-		int skill;
+		int points;
 		int speed;
 
 };
@@ -82,16 +83,18 @@ class SnowBoard: public SnowSport
 		int push();					//push the board to start
 		int do_flip();					//flip to avoid objects and increase speed
 		int jump();					//jump to avoid obstacles
-		int stop_board();				//end the race
+		int tallypoints();				//keep track of points
 
 	protected:
 		char * color;
-		int skill;
+		int points;
 		int speed;
 };
 
 
 //Prototypes
 int menu();
-void add_racer_name(SnowSport & to_add, char add_name[], int a_skill_level);
-void display_racer(SnowSport & to_display);
+int racer_menu();
+void add_racer_name(SkateLLL & to_add, char add_name[], int a_skill_level);
+void display_racer(IceSkate & to_display);
+

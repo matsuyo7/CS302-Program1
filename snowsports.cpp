@@ -19,7 +19,6 @@ SnowSport::SnowSport(char * new_name, int & your_skill): name(nullptr), skill(yo
 	skill = 0;
 	name = new char [strlen(new_name) + 1];
 	strcpy(name, new_name);
-	point = 0;
 }
 
 //destructor
@@ -58,6 +57,7 @@ int SnowSport::racer_info(char * add_name, int & your_skill)
 //Displays a race
 int SnowSport::display() const
 {
+	cout << "\nIs this working" << endl;
 	if (!name || !skill)
 		return 0;
 	cout << "\nPlayer: " << name << endl;
@@ -84,8 +84,13 @@ int SnowSport::tallypoints()
 IceSkate::IceSkate()
 {
 }
+
 //takes in the user's name and skill level to help determine speed
-IceSkate::IceSkate(char * your_name, const int & skill_level): SnowSport(your_name, skill_level)
+IceSkate::IceSkate(char * your_name, int & skill_level): SnowSport(your_name, skill_level)
+{
+}
+
+IceSkate::~IceSkate()
 {
 }
 

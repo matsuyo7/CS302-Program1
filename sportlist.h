@@ -7,18 +7,19 @@
 //or if there was an obstacle in the way, or how much energy the racer has. The program will determine numbers
 //based on these events, and in the end will give a score which determines who wins based on the higher score.
 
-//#include "snowsports.h"
+#include "snowsports.h"
 
 
 class SkateNode: public IceSkate
 {
 	public:
 		SkateNode();					//initializes data
-		SkateNode(const char * & your_name, const char * & skill_level);	//takes in the user's name and skill level to help determine speed
+//		SkateNode(const char * your_name, const int & skill_level);	//takes in the user's name and skill level to help determine speed
+		SkateNode(const SkateNode & src);
+		SkateNode(const IceSkate & new_skater);
 		~SkateNode();
-		int display();	
-		int energy();					//how much energy the skater has until exhausted
-		int jump();					//jump to avoid obstacles
+		int set_next(SkateNode * new_next);
+		SkateNode * & get_next();
 
 	private:
 		SkateNode * next;
@@ -28,31 +29,26 @@ class SkiNode: public Ski
 {
 	public:
 		SkiNode();
-		SkiNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
+		SkiNode(const char * your_name, const int & skill_level);	//inputs user's name and skill level
 		~SkiNode();
-		int display();
-		int energy();					//how much energy the skiier has until exhausted
-		int do_flip();					//user flips to avoid obstacle and gain speed
+		int set_next(SkiNode * new_next);
+		SkiNode * & get_next();
 
 	private:
-		SkiNodeNode * next;
+		SkiNode * next;
 };
 
+/*
 class BoardNode: public SnowBoard
 {
 	public:
 		BoardNode();
 		BoardNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
 		~BoardNode();
-		int display() const;
-		int push();					//push the board to start
-		int do_flip();					//flip to avoid objects and increase speed
-		int jump();					//jump to avoid obstacles
-		int stop_board();				//end the race
 
 	private:
 		BoardNode * next;
-};
+};*/
 
 class SkateLLL
 {
@@ -62,32 +58,37 @@ class SkateLLL
 		SkateLLL(const SkateLLL & to_copy);
 		SkateLLL & operator=(const SkateLLL & src);
 		int display() const;
-		int insert();
+		int insert(const SkateNode & src);
 		int remove();
-		int retrieve();
+		int find_skater(const char * to_find) const;
 		int removeall();
 
 	private:
 		SkateNode * head;
+		int copy(SkateNode * & dest, SkateNode * src);
+		int find_skater(const char * to_find, SkateNode * head) const;
+		int display(SkateNode * head) const;
 };
 
 class SkiCLL
 {
 	public:
 		SkiCLL();
-		~SkCLL();
+		~SkiCLL();
 		SkiCLL(const SkiCLL & to_copy);
 		SkiCLL & operator=(const SkiCLL & src);
 		int display() const;
 		int insert();
 		int remove();
-		int retrieve();
+		int find_skier(const char * to_find) const;
 		int removeall();
 
 	private:
 		SkiNode * head;
+		int find_skier(const char * to_find, SkiNode * head) const;
+		int display(SkiNode * head) const;
 };
-
+/*
 class BoardVector
 {
 	public:
@@ -99,4 +100,4 @@ class BoardVector
 		vector<SnowBoard> BoardList;
 		BoardNode * head;
 };
-
+*/
