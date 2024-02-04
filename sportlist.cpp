@@ -4,6 +4,7 @@
 //This file implements the functions that deal with the node class and the list class for each
 //sport. The lists will be using their parent class as the argument to insert into the list.
 
+#include "sportlist.h"
 
 //ICESKATE NODE
 //default constructor to initialize data
@@ -11,11 +12,11 @@ SkateNode::SkateNode(): next(nullptr)
 {
 }
 
-//initialization list to initialize data members in the hiearchy
-SkateNode::SkateNode(const SkateNode & src): IceSkate(src), next(nullptr);
+SkateNode::SkateNode(const SkateNode & src): IceSkate(src), next(nullptr)
 {
 }
-SkateNode::SkateNode(const IceSkate & new_skater): IceSkate(new_skater), next(nullptr);
+//initialization list to initialize data members in the hiearchy
+SkateNode::SkateNode(const IceSkate & new_skater): IceSkate(new_skater), next(nullptr)
 {
 }
 /*SkateNode::SkateNode(const char * your_name, const int & skill_level): IceSkate(your_name, skill_level), next(nullptr)
@@ -24,12 +25,16 @@ SkateNode::SkateNode(const IceSkate & new_skater): IceSkate(new_skater), next(nu
 */
 SkateNode::~SkateNode()
 {
+	if (!head)
+		return;
+	return removeAll(head);
 }
 
 //set the next pointer to the incoming pointer
 int SkateNode::set_next(SkateNode * new_next)
 {
 	next = new_next;
+	return 1;
 }
 
 //return the next pointer
@@ -47,6 +52,7 @@ SkateLLL::SkateLLL(): head(nullptr)
 //destructor
 SkateLLL::~SkateLLL()
 {
+	removeAll(head);
 }
 
 //copy constructor
@@ -68,13 +74,14 @@ int SkateLLL::copy(SkateNode * & dest, SkateNode * src)
 }
 
 //assignment operator
-SkateLLL::SkateLLL & operator=(const SkateLLL & src)
+SkateLLL & SkateLLL::operator=(const SkateLLL & src)
 {
 	if (this == &src)
 		return *this;
 	if (head)
 		removeAll(head);
 	copy(head, src.head);
+	return *this;
 }
 
 //the iceskate LLL display that will also go up the hiearchy to display all in the LLL
@@ -116,10 +123,22 @@ int SkateLLL::find_skater(const char * to_find)
 int SkateLLL::find_skater(const char * to_find, SkateNode * head) const
 {
 }
-
+*/
 //remove all ice skaters from the list
-int SkateLLL::removeall()
+int SkateLLL::removeAll()
 {
+	if (!head)
+		return 0;
+	return removeAll(head);
 }
 
-*/
+
+int SkateLLL::removeAll(SkateNode * & head)
+{
+	if (!head)
+		return 0;
+	SkateNode * hold = head->get_next();
+	delete head;
+	head = nullptr;
+	return removeAll(hold);
+}

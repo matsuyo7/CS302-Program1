@@ -61,13 +61,14 @@ class SkateLLL
 		int insert(const SkateNode & src);
 		int remove();
 		int find_skater(const char * to_find) const;
-		int removeall();
+		int removeAll();
 
 	private:
 		SkateNode * head;
 		int copy(SkateNode * & dest, SkateNode * src);
 		int find_skater(const char * to_find, SkateNode * head) const;
 		int display(SkateNode * head) const;
+		int removeAll(SkateNode * & head);
 };
 
 class SkiCLL
@@ -81,12 +82,13 @@ class SkiCLL
 		int insert();
 		int remove();
 		int find_skier(const char * to_find) const;
-		int removeall();
+		int removeAll();
 
 	private:
 		SkiNode * head;
 		int find_skier(const char * to_find, SkiNode * head) const;
 		int display(SkiNode * head) const;
+		int removeAll(SkiNode * & head);
 };
 /*
 class BoardVector

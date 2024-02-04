@@ -12,7 +12,20 @@
 #include <vector>
 #include <cstring>
 #include <cstdlib>
+#include <ctime>
 using namespace std;
+
+//10 racer names
+/*
+enum RacerName
+{
+	Eevee, Gengar, Pikachu, Mimikyu,
+	Snorlax, Mew, Arceus, Lugia,
+	Umbreon, Espeon
+};
+*/
+inline vector<string> racer_names = {"Eevee", "Gengar", "Pikachu", "Mimikyu", "Snorlax", 
+	"Mew", "Arceus", "Lugia", "Umbreon", "Espeon"};
 
 const int SIZE {200};
 
@@ -20,81 +33,70 @@ class SnowSport
 {
 	public:
 		SnowSport();					//default constructor
-		SnowSport(char * new_name, int & your_skill);		//copy constructor
+		SnowSport(const char * new_name);		//copy constructor
+		SnowSport & operator=(const SnowSport & src);	//assignment operator
 		~SnowSport();					//destructor
-		//SnowSport & operator=(const SnowSport & src);	//assignment operator
-		int racer_info(char * add_name, int & your_skill);
 		int display() const;				//displays the name
-		int startrace(int add_skill);				//start the race and add a timer
-		int stoprace();					//stop the race
+		int generate_num();				//generates the random number
+		int racer_info(const char * add_name);		//adds in the racer name coming from the client
 
 	protected:
-		char * name;
-		int skill;
+		char * name;					//racer name
 
 };
 
 class IceSkate: public SnowSport
 {
 	public:
-		IceSkate();							//initializes data
-		IceSkate(char * your_name, int & skill_level);	//takes in the user's name and skill level to help determine speed
-		~IceSkate();
-		int display() const;	
-		int energy();							//how much energy the skater has until exhausted
-		int jump();							//jump to avoid obstacles
-		int slipped();					//takes points away if racer slipped
-		int tallypoints();				//keep track of points
+		IceSkate();					//initializes data
+		IceSkate(const char * your_name);		//takes in the user's name and skill level to help determine speed
+		~IceSkate();					//destructor
+		int display() const;				//displays iceskate's points
+		int jump();					//jump to avoid obstacles, adds/subtracts points and returns success/failure
+		int slipped();					//random chance for player to slip, add/subtracts points and returns success/failure
+		int tallypoints();				//keep track of iceskater points
 
 	
 	protected:
-		int points;
-		int speed;
+		int points;					//racer points
 
 };
 
 class Ski: public SnowSport
 {
 	public:
-		Ski();							//constructor
-		Ski(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		~Ski();							//destructor
-		int display() const;						//displays information
-		int energy();						//how much energy the skiier has until exhausted
-		int do_flip();						//user flips to avoid obstacle and gain speed
-		int lost_stick();
+		Ski();						//constructor
+		Ski(const char * your_name);			//inputs user's name and skill level
+		~Ski();						//destructor
+		int display() const;				//displays points
+		int flip();					//does a flip to avoid obstacle, add/subtract points, return success/failure
+		int lost_stick();				//chance to lose sticks, add/subtract points, return success/failure
 		int tallypoints();				//keep track of points
 
 	protected:
-		int points;
-		int speed;
+		int points;					//race points
 
 };
 
 class SnowBoard: public SnowSport
 {
 	public:
-		SnowBoard();
-		SnowBoard(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		~SnowBoard();
-		SnowBoard(const SnowBoard & to_copy);
-		SnowBoard & operator=(const SnowBoard & src);
-		int display() const;
-		int push();					//push the board to start
-		int do_flip();					//flip to avoid objects and increase speed
-		int jump();					//jump to avoid obstacles
-		int tallypoints();				//keep track of points
+		SnowBoard();						//default constructor
+		SnowBoard(const char * your_name, char * color);	//initializes board color and points
+		SnowBoard(const SnowBoard & to_copy);			//copy constructor
+		SnowBoard & operator=(const SnowBoard & src);		//assignment operator
+		~SnowBoard();						//destructor
+		int display() const;					//displays the board color and points
+		int flip();						//flip to avoid objects, add/sub points, return success/failure
+		int fall();						//fall off the board, add/sub points, return success/fail
+		int tallypoints();					//keep track of points
 
 	protected:
-		char * color;
-		int points;
-		int speed;
+		char * color;						//color of the snow board
+		int points;						//race points
 };
 
 
 //Prototypes
 int menu();
-int racer_menu();
-void add_racer_name(SkateLLL & to_add, char add_name[], int a_skill_level);
-void display_racer(IceSkate & to_display);
-
+int shuffle_name(vector<string> & r_names);
