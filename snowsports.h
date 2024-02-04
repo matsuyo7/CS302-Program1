@@ -16,14 +16,6 @@
 using namespace std;
 
 //10 racer names
-/*
-enum RacerName
-{
-	Eevee, Gengar, Pikachu, Mimikyu,
-	Snorlax, Mew, Arceus, Lugia,
-	Umbreon, Espeon
-};
-*/
 inline vector<string> racer_names = {"Eevee", "Gengar", "Pikachu", "Mimikyu", "Snorlax", 
 	"Mew", "Arceus", "Lugia", "Umbreon", "Espeon"};
 
@@ -33,7 +25,8 @@ class SnowSport
 {
 	public:
 		SnowSport();					//default constructor
-		SnowSport(const char * new_name);		//copy constructor
+		SnowSport(const char * new_name);		//initialization
+		SnowSport(const SnowSport & to_copy);
 		SnowSport & operator=(const SnowSport & src);	//assignment operator
 		~SnowSport();					//destructor
 		int display() const;				//displays the name
@@ -50,11 +43,12 @@ class IceSkate: public SnowSport
 	public:
 		IceSkate();					//initializes data
 		IceSkate(const char * your_name);		//takes in the user's name and skill level to help determine speed
+//		IceSkate(const IceSkate & to_copy);
 		~IceSkate();					//destructor
 		int display() const;				//displays iceskate's points
 		int jump();					//jump to avoid obstacles, adds/subtracts points and returns success/failure
 		int slipped();					//random chance for player to slip, add/subtracts points and returns success/failure
-		int tallypoints();				//keep track of iceskater points
+		int add_time();
 
 	
 	protected:
@@ -70,8 +64,8 @@ class Ski: public SnowSport
 		~Ski();						//destructor
 		int display() const;				//displays points
 		int flip();					//does a flip to avoid obstacle, add/subtract points, return success/failure
-		int lost_stick();				//chance to lose sticks, add/subtract points, return success/failure
-		int tallypoints();				//keep track of points
+		int loss_stick();				//chance to lose sticks, add/subtract points, return success/failure
+		int add_time();
 
 	protected:
 		int points;					//race points
@@ -89,7 +83,7 @@ class SnowBoard: public SnowSport
 		int display() const;					//displays the board color and points
 		int flip();						//flip to avoid objects, add/sub points, return success/failure
 		int fall();						//fall off the board, add/sub points, return success/fail
-		int tallypoints();					//keep track of points
+		int add_time();
 
 	protected:
 		char * color;						//color of the snow board

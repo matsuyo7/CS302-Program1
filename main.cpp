@@ -1,4 +1,4 @@
-//Molina Nhoung CS302 1/22/24
+//Molina Nhoung CS302 2/3/2024
 //
 //Program 1
 //
@@ -14,36 +14,89 @@
 int main()
 {
 	//Variables
-//	int option {0};
-//	SnowSport player;
+	int option {0};
 	IceSkate iceplayer;
-	/*
 	SkateLLL skate_racer;
-	*/
-/*	SkiCLL ski_player;
-	BoardVector board_player;
-	*/
+	Ski skiplayer;
+	SkiCLL ski_racer;;
+	//BoardVector board_player;
 	const char * add_name;
 	char pause {' '};
-
-	shuffle_name(racer_names);
-	cout << "\nShuffled names: ";
-	for (auto it = racer_names.begin(); it < racer_names.end(); ++it)
+	char start {'n'};
+	
+	//create a seed for random number
+	srand(time(0));
+	
+	do
 	{
-		cout << *it << endl;
-		add_name = (*it).c_str();
-		cout << "\nChar:" << add_name << endl;
-		iceplayer.racer_info(add_name);
-		iceplayer.display();
-		iceplayer.jump();
-		iceplayer.slipped();
-		iceplayer.tallypoints();
-		cout << "\nPress a key for next sequence: ";
-		cin >> pause;
-		cin.ignore(100, '\n');
+		//menu option to pick sport
+		option = menu();
+		if (option == 1)
+		{
+			//shuffle the name around
+			shuffle_name(racer_names);
+			for (auto it = racer_names.begin(); it < racer_names.end(); ++it)
+			{
+				add_name = (*it).c_str();
+				iceplayer.racer_info(add_name);
+				skate_racer.insert(iceplayer);
 
-	}
+			}
+			//displays all the racers
+			cout << "\n***RACERS*** ";
+			skate_racer.display();
+			//starts the race
+			cout << "\n\nStart race? (Y/N): ";
+			cin >> start;
+			cin.ignore(100, '\n');
+			if (toupper(start) == 'Y')
+			{
+				for (int i = 0; i < 5; ++i)
+				{
+					skate_racer.start_race();
+					cout << "\n\nPress a key for next sequence: ";
+					cin >> pause;
+					cin.ignore(100, '\n');
+				}
+				skate_racer.display();
+			}
+			skate_racer.removeAll();
+		}
+		else if (option == 2)
+		{
+			//shuffle the name around
+			shuffle_name(racer_names);
+			for (auto it = racer_names.begin(); it < racer_names.end(); ++it)
+			{
+				add_name = (*it).c_str();
+				skiplayer.racer_info(add_name);
+				ski_racer.insert(skiplayer);
 
+			}
+			//displays all the racers
+			cout << "\n***RACERS*** ";
+			ski_racer.display();
+			//starts the race
+			cout << "\n\nStart race? (Y/N): ";
+			cin >> start;
+			cin.ignore(100, '\n');
+			if (toupper(start) == 'Y')
+			{
+				for (int i = 0; i < 5; ++i)
+				{
+					ski_racer.start_race();
+					cout << "\n\nPress a key for next sequence: ";
+					cin >> pause;
+					cin.ignore(100, '\n');
+				}
+				ski_racer.display();
+			}
+			ski_racer.removeAll();
+		}
+		else if (option == 3)
+		{
+		}
+	} while (option != 4);
 
 	cout << "\n***Exiting program" << endl;
 

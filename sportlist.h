@@ -1,4 +1,4 @@
-//Molina Nhoung CS302 1/22/24
+//Molina Nhoung CS302 2/3/2024
 //
 //Program 1
 //
@@ -13,13 +13,12 @@
 class SkateNode: public IceSkate
 {
 	public:
-		SkateNode();					//initializes data
-//		SkateNode(const char * your_name, const int & skill_level);	//takes in the user's name and skill level to help determine speed
-		SkateNode(const SkateNode & src);
-		SkateNode(const IceSkate & new_skater);
-		~SkateNode();
-		int set_next(SkateNode * new_next);
-		SkateNode * & get_next();
+		SkateNode();					//default constructor
+		SkateNode(const SkateNode & src);		//copy constructor
+		SkateNode(const IceSkate & new_skater);		//initialization
+		~SkateNode();					//destructor
+		int set_next(SkateNode * new_next);		//set next pointer
+		SkateNode * & get_next();			//return the next pointer
 
 	private:
 		SkateNode * next;
@@ -28,11 +27,12 @@ class SkateNode: public IceSkate
 class SkiNode: public Ski
 {
 	public:
-		SkiNode();
-		SkiNode(const char * your_name, const int & skill_level);	//inputs user's name and skill level
-		~SkiNode();
-		int set_next(SkiNode * new_next);
-		SkiNode * & get_next();
+		SkiNode();					//default constructor
+		SkiNode(const SkiNode & src);			//copy constructor
+		SkiNode(const Ski & new_skier);			//initialization
+		~SkiNode();					//destructor
+		int set_next(SkiNode * new_next);		//set next pointer
+		SkiNode * & get_next();				//return the next pointer
 
 	private:
 		SkiNode * next;
@@ -53,42 +53,45 @@ class BoardNode: public SnowBoard
 class SkateLLL
 {
 	public:
-		SkateLLL();
-		~SkateLLL();
-		SkateLLL(const SkateLLL & to_copy);
-		SkateLLL & operator=(const SkateLLL & src);
-		int display() const;
-		int insert(const SkateNode & src);
-		int remove();
-		int find_skater(const char * to_find) const;
-		int removeAll();
+		SkateLLL();					//default constructor
+		~SkateLLL();					//destructor
+		SkateLLL(const SkateLLL & to_copy);		//copy constructor
+		SkateLLL & operator=(const SkateLLL & src);	//assignment operator
+		int display() const;				//display the racer
+		int insert(const IceSkate & src);		//insert a racer into the list
+		int removeAll();				//removes all racers
+		int start_race() const;				//starts the race and random events
+		int score_board() const;			//shows the scores
 
 	private:
 		SkateNode * head;
 		int copy(SkateNode * & dest, SkateNode * src);
-		int find_skater(const char * to_find, SkateNode * head) const;
 		int display(SkateNode * head) const;
 		int removeAll(SkateNode * & head);
+		int start_race(SkateNode * head) const;
+		int score_board(SkateNode * head) const;
 };
 
 class SkiCLL
 {
 	public:
-		SkiCLL();
-		~SkiCLL();
-		SkiCLL(const SkiCLL & to_copy);
-		SkiCLL & operator=(const SkiCLL & src);
-		int display() const;
-		int insert();
-		int remove();
-		int find_skier(const char * to_find) const;
-		int removeAll();
+		SkiCLL();					//default constructor
+		~SkiCLL();					//destructor
+		SkiCLL(const SkiCLL & to_copy);			//copy constructor
+		SkiCLL & operator=(const SkiCLL & src);		//assignment operator
+		int display() const;				//displays the racer
+		int insert(const Ski & src);			//inserts a racer
+		int removeAll();				//removes all racers
+		int start_race() const;				//starts the race and random events
+		int score_board() const;			//shows the scores
 
 	private:
-		SkiNode * head;
-		int find_skier(const char * to_find, SkiNode * head) const;
-		int display(SkiNode * head) const;
-		int removeAll(SkiNode * & head);
+		SkiNode * rear;
+		int copy(SkiNode * & dest, SkiNode * src, SkiNode * src_rear);
+		int display(SkiNode * rear) const;
+		int removeAll(SkiNode * & rear);
+		int start_race(SkiNode * rear) const;
+		int score_board(SkiNode * rear) const;
 };
 /*
 class BoardVector
