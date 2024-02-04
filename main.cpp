@@ -71,6 +71,8 @@ int main()
 				add_name = (*it).c_str();
 				skiplayer.racer_info(add_name);
 				ski_racer.insert(skiplayer);
+		//		cout << "\nRACERS" << endl;
+		//		ski_racer.display();
 
 			}
 			//displays all the racers

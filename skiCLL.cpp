@@ -55,9 +55,12 @@ SkiCLL::~SkiCLL()
 {
 	if (!rear)
 		return;
+	/*
 	SkiNode * head = rear->get_next();
 	rear->set_next(nullptr);
 	removeAll(head);
+	rear = nullptr;*/
+	removeAll();
 }
 
 //copy constructor
@@ -145,10 +148,17 @@ int SkiCLL::removeAll(SkiNode * & rear)
 {
 	if (!rear)
 		return 0;
+	if (this->rear == rear)
+	{
+		delete rear;
+		rear = nullptr;
+		this->rear = nullptr;
+		return 1;
+	}
 	SkiNode * hold = rear->get_next();
 	delete rear;
 	rear = hold;
-	return removeAll(rear->get_next());
+	return removeAll(rear);
 }
 
 //starts the race and random events
