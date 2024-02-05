@@ -135,6 +135,56 @@ int SkiCLL::insert(const Ski & src)
 
 }
 
+//find a racer
+int SkiCLL::find(char * to_find)
+{
+	if (!rear)
+		return 0;
+	return find(to_find, rear->get_next());
+}
+int SkiCLL::find(char * to_find, SkiNode * rear)
+{
+	if (this->rear == rear)
+	{
+		if (rear->compare_names(to_find))
+			return 1;
+		return 0;
+	}
+	if (rear->compare_names(to_find))
+		return 1;
+	return find(to_find, rear->get_next());
+}
+
+//remove one racer if found
+int SkiCLL::remove(char * to_remove)
+{
+	if (!rear)
+		return 0;
+	return remove(to_remove, rear->get_next());
+}
+int SkiCLL::remove(char * to_remove, SkiNode * & rear)
+{
+	if (this->rear == rear)
+	{
+		if (rear->compare_names(to_remove))
+		{
+			delete rear;
+			rear = nullptr;
+			this->rear = nullptr;
+			return 1;
+		}
+		return 0;
+	}
+	if (rear->compare_names(to_remove))
+	{
+		SkiNode * hold = rear->get_next();
+		delete rear;
+		rear = hold;
+		return 1;
+	}
+	return remove(to_remove, rear->get_next());
+}
+
 //removes all racers
 int SkiCLL::removeAll()
 {

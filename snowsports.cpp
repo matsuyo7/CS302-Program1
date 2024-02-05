@@ -68,6 +68,16 @@ int SnowSport::display() const
 	return 1;
 }
 
+//take in a name to find and return true if the same
+int SnowSport::compare_names(char * to_compare)
+{
+	if (!name)
+		return 0;
+	if (strcmp(to_compare, name) == 0)
+		return 1;
+	return 0;
+}
+
 //generate a random number
 int SnowSport::generate_num()
 {
@@ -229,6 +239,126 @@ int Ski::loss_stick()
 
 //adds a point for every second
 int Ski::add_time()
+{
+	++points;
+	return 1;
+}
+
+
+//SNOWBOARD
+//default constructor
+SnowBoard::SnowBoard(): color(nullptr)
+{
+	points = 0;
+}
+
+//initialize the board color and points
+SnowBoard::SnowBoard(const char * your_name, char * your_color): SnowSport(your_name)
+{
+	color = new char [strlen(your_color) + 1];
+	strcpy(color, your_color);
+	points = 0;
+}
+
+//copy constructor
+SnowBoard::SnowBoard(const SnowBoard & to_copy): SnowSport(to_copy)
+{
+	color = new char [strlen(to_copy.color) + 1];
+	strcpy(color, to_copy.color);
+	points = to_copy.points;
+}
+
+//assignment operator
+SnowBoard & SnowBoard::operator=(const SnowBoard & src)
+{
+	if (this == &src)
+	{
+		delete[] color;
+		color = new char [strlen(src.color) + 1];
+		strcpy(color, src.color);
+		points = src.points;
+	}
+	return *this;
+}
+
+//destructor
+SnowBoard::~SnowBoard()
+{
+	if (color)
+		delete[] color;
+	color = nullptr;
+	points = 0;
+}
+
+//insert a new racer
+int SnowBoard::insert(const char * a_name, char * a_color)
+{
+	if (!a_color || !a_color)
+		return 0;
+	if (color)
+		delete[] color;
+	SnowSport::racer_info(a_name);
+	color = new char[strlen(a_color) + 1];
+	strcpy(color, a_color);
+	return 1;
+}
+
+//displays the board color and points
+int SnowBoard::display() const
+{
+	SnowSport::display();
+	cout << " Board Color: " << color << " Points: " << points;
+	return 1;
+}
+
+//flip to avoid objects, add/sub points, return success/failure
+int SnowBoard::flip()
+{
+	int random_num = generate_num();
+	if (random_num % 2 == 0)
+	{
+		//use current time to to use as a seed
+		random_num = generate_num();
+		//if even number, then the board did not flip over
+		if (random_num % 2 == 0)
+		{
+			cout << "\nRacer " << name << " almost flipped over!";
+			points = points + 2;
+			cout << "\n+2 points";
+			return 1;
+		}
+		cout << "\nRacer " << name << " flipped their board and fell off!";
+		--points;
+		cout << "\n-1 point";
+	}
+	return 0;
+}
+
+//fall off the board, add/sub points, return success/fail
+int SnowBoard::fall()
+{
+	int random_num = generate_num();
+	if (random_num % 2 == 0)
+	{
+		//use current time to to use as a seed
+		random_num = generate_num();
+		//if even number, then they jumped the snow hill
+		if (random_num % 2 == 0)
+		{
+			cout << "\nRacer " << name << " jumped over the snowy ledge!";
+			points = points + 2;
+			cout << "\n+2 points";
+			return 1;
+		}
+		cout << "\nRacer " << name << " was unable to jump the ledge! They fell!";
+		--points;
+		cout << "\n-1 point";
+	}
+	return 0;
+}
+
+//adds the time to the points for every second
+int SnowBoard::add_time()
 {
 	++points;
 	return 1;

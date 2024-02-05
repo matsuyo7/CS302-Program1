@@ -10,6 +10,7 @@
 #include "snowsports.h"
 
 
+//NODES
 class SkateNode: public IceSkate
 {
 	public:
@@ -38,18 +39,8 @@ class SkiNode: public Ski
 		SkiNode * next;
 };
 
-/*
-class BoardNode: public SnowBoard
-{
-	public:
-		BoardNode();
-		BoardNode(const char * & your_name, const int & skill_level);	//inputs user's name and skill level
-		~BoardNode();
 
-	private:
-		BoardNode * next;
-};*/
-
+//LISTS
 class SkateLLL
 {
 	public:
@@ -59,6 +50,8 @@ class SkateLLL
 		SkateLLL & operator=(const SkateLLL & src);	//assignment operator
 		int display() const;				//display the racer
 		int insert(const IceSkate & src);		//insert a racer into the list
+		int find(char * to_find);			//find a racer
+		int remove(char * to_remove);			//remove one racer
 		int removeAll();				//removes all racers
 		int start_race() const;				//starts the race and random events
 		int score_board() const;			//shows the scores
@@ -67,6 +60,8 @@ class SkateLLL
 		SkateNode * head;
 		int copy(SkateNode * & dest, SkateNode * src);
 		int display(SkateNode * head) const;
+		int find(char * to_find, SkateNode * head);
+		int remove(char * to_remove, SkateNode * & head);
 		int removeAll(SkateNode * & head);
 		int start_race(SkateNode * head) const;
 		int score_board(SkateNode * head) const;
@@ -81,6 +76,8 @@ class SkiCLL
 		SkiCLL & operator=(const SkiCLL & src);		//assignment operator
 		int display() const;				//displays the racer
 		int insert(const Ski & src);			//inserts a racer
+		int find(char * to_find);			//find a racer
+		int remove(char * to_remove);			//remove one racer
 		int removeAll();				//removes all racers
 		int start_race() const;				//starts the race and random events
 		int score_board() const;			//shows the scores
@@ -89,20 +86,23 @@ class SkiCLL
 		SkiNode * rear;
 		int copy(SkiNode * & dest, SkiNode * src, SkiNode * src_rear);
 		int display(SkiNode * rear) const;
+		int find(char * to_find, SkiNode * rear);
+		int remove(char * to_remove, SkiNode * & rear);
 		int removeAll(SkiNode * & rear);
 		int start_race(SkiNode * rear) const;
 		int score_board(SkiNode * rear) const;
 };
-/*
+
 class BoardVector
 {
 	public:
-		BoardVector();
-		~BoardVector();
-		int display() const;
+		BoardVector();			//default constructor
+		~BoardVector();					//destructor
+		int display() const;				//displays the racer
+		int insert(const SnowBoard & src);		//inserts a racer
+		int removeAll();				//removes all racers
+		int start_race();				//starts the race and random events
 
 	private:
 		vector<SnowBoard> BoardList;
-		BoardNode * head;
 };
-*/

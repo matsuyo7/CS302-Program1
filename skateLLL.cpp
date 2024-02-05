@@ -115,6 +115,44 @@ int SkateLLL::insert(const IceSkate & src)
 	head = hold;
 	return 1;
 }
+
+//find a racer
+int SkateLLL::find(char * to_find)
+{
+	if (!head)
+		return 0;
+	return find(to_find, head);
+}
+int SkateLLL::find(char * to_find, SkateNode * head)
+{
+	if (!head)
+		return 0;
+	if (head->compare_names(to_find))
+		return 1;
+	return find(to_find, head->get_next());
+}
+
+//remove one racer if found
+int SkateLLL::remove(char * to_remove)
+{
+	if (!head)
+		return 0;
+	return remove(to_remove, head);
+}
+int SkateLLL::remove(char * to_remove, SkateNode * & head)
+{
+	if (!head)
+		return 0;
+	if (head->compare_names(to_remove))
+	{
+		SkateNode * hold = head->get_next();
+		delete head;
+		head = hold;
+		return 1;
+	}
+	return remove(to_remove, head->get_next());
+}
+
 //remove all ice skaters from the list
 int SkateLLL::removeAll()
 {

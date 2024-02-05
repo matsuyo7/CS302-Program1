@@ -19,6 +19,10 @@ using namespace std;
 inline vector<string> racer_names = {"Eevee", "Gengar", "Pikachu", "Mimikyu", "Snorlax", 
 	"Mew", "Arceus", "Lugia", "Umbreon", "Espeon"};
 
+//board colors
+inline vector<string> b_colors = {"Red", "Orange", "Yellow", "Green", "Blue", "Purple", 
+	"Pink", "White", "Black", "Brown"};
+
 const int SIZE {200};
 
 class SnowSport
@@ -30,6 +34,7 @@ class SnowSport
 		SnowSport & operator=(const SnowSport & src);	//assignment operator
 		~SnowSport();					//destructor
 		int display() const;				//displays the name
+		int compare_names(char * to_compare);		//take in a name to find and return true if the same
 		int generate_num();				//generates the random number
 		int racer_info(const char * add_name);		//adds in the racer name coming from the client
 
@@ -43,12 +48,11 @@ class IceSkate: public SnowSport
 	public:
 		IceSkate();					//initializes data
 		IceSkate(const char * your_name);		//takes in the user's name and skill level to help determine speed
-//		IceSkate(const IceSkate & to_copy);
 		~IceSkate();					//destructor
 		int display() const;				//displays iceskate's points
 		int jump();					//jump to avoid obstacles, adds/subtracts points and returns success/failure
 		int slipped();					//random chance for player to slip, add/subtracts points and returns success/failure
-		int add_time();
+		int add_time();					//adds the time per second to the points
 
 	
 	protected:
@@ -65,7 +69,7 @@ class Ski: public SnowSport
 		int display() const;				//displays points
 		int flip();					//does a flip to avoid obstacle, add/subtract points, return success/failure
 		int loss_stick();				//chance to lose sticks, add/subtract points, return success/failure
-		int add_time();
+		int add_time();					//adds the time per second to the points
 
 	protected:
 		int points;					//race points
@@ -76,14 +80,15 @@ class SnowBoard: public SnowSport
 {
 	public:
 		SnowBoard();						//default constructor
-		SnowBoard(const char * your_name, char * color);	//initializes board color and points
+		SnowBoard(const char * your_name, char * your_color);	//initializes board color and points
 		SnowBoard(const SnowBoard & to_copy);			//copy constructor
 		SnowBoard & operator=(const SnowBoard & src);		//assignment operator
 		~SnowBoard();						//destructor
+		int insert(const char * a_name, char * a_color);	//insert a new racer
 		int display() const;					//displays the board color and points
 		int flip();						//flip to avoid objects, add/sub points, return success/failure
 		int fall();						//fall off the board, add/sub points, return success/fail
-		int add_time();
+		int add_time();						//adds the time per second to the points
 
 	protected:
 		char * color;						//color of the snow board

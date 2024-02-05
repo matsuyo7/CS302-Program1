@@ -19,14 +19,24 @@ int main()
 	SkateLLL skate_racer;
 	Ski skiplayer;
 	SkiCLL ski_racer;;
-	//BoardVector board_player;
+	SnowBoard boardplayer;
+	BoardVector board_racer;
 	const char * add_name;
+	char a_color[SIZE];
 	char pause {' '};
 	char start {'n'};
 	
 	//create a seed for random number
 	srand(time(0));
 	
+	/*
+			shuffle_name(b_colors);
+			for (auto it = b_colors.begin(); it < b_colors.end(); ++it)
+			{
+				*it = (*it).c_str();
+				cout << "\nColor: " << *it << endl;
+
+			}*/
 	do
 	{
 		//menu option to pick sport
@@ -61,6 +71,7 @@ int main()
 				skate_racer.display();
 			}
 			skate_racer.removeAll();
+			cout << "\nRESETED RACERS" << endl;
 		}
 		else if (option == 2)
 		{
@@ -71,8 +82,6 @@ int main()
 				add_name = (*it).c_str();
 				skiplayer.racer_info(add_name);
 				ski_racer.insert(skiplayer);
-		//		cout << "\nRACERS" << endl;
-		//		ski_racer.display();
 
 			}
 			//displays all the racers
@@ -94,9 +103,43 @@ int main()
 				ski_racer.display();
 			}
 			ski_racer.removeAll();
+			cout << "\nRESETED RACERS" << endl;
 		}
 		else if (option == 3)
 		{
+			cout << "\nPick 10 snowboard colors: ";
+			//shuffle the name around
+			shuffle_name(racer_names);
+			for (auto it = racer_names.begin(); it < racer_names.end(); ++it)
+			{
+				cout << "\nSnowboard color: ";
+				cin.get(a_color, SIZE, '\n');
+				cin.ignore(100, '\n');
+				add_name = (*it).c_str();
+				boardplayer.insert(add_name, a_color);
+				board_racer.insert(boardplayer);
+
+			}
+			//displays all the racers
+			cout << "\n***RACERS*** ";
+			board_racer.display();
+			//starts the race
+			cout << "\n\nStart race? (Y/N): ";
+			cin >> start;
+			cin.ignore(100, '\n');
+			if (toupper(start) == 'Y')
+			{
+				for (int i = 0; i < 5; ++i)
+				{
+					board_racer.start_race();
+					cout << "\n\nPress a key for next sequence: ";
+					cin >> pause;
+					cin.ignore(100, '\n');
+				}
+				board_racer.display();
+			}
+			board_racer.removeAll();
+			cout << "\nRESETED RACERS" << endl;
 		}
 	} while (option != 4);
 
@@ -127,6 +170,7 @@ int menu()
 	return option;
 }
 
+//menu for testing functions
 int racer_menu()
 {
 	int racer_option = 0;
@@ -148,26 +192,12 @@ int racer_menu()
 	} while (racer_option < 1 || racer_option > 8);
 	return racer_option;
 }
-/*
-int add_racer_name(IceSkate & to_add, SkateLLL & to_insert, char add_name[], int a_skill_level)
-{
 
-	cout << "\nName: ";
-	cin.get(add_name, SIZE, '\n');
-	cin.ignore(100, '\n');
-	cout << "\nSkill level (1 = new, 10 = pro): ";
-	cin >> a_skill_level;
-	to_add.racer_info(add_name, a_skill_level);
-	//to_insert.insert(to_add);
-	return 1;
-
-}
-
-*/
+//shuffle names
 int shuffle_name(vector<string> & r_names)
 {
 	//seed a random number from the time
-	srand(time(0));
+//	srand(time(0));
 	//size of the vector
 	size_t size = r_names.size();
 	for (size_t i = 0; i < size; ++i)
