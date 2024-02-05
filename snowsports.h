@@ -19,10 +19,6 @@ using namespace std;
 inline vector<string> racer_names = {"Eevee", "Gengar", "Pikachu", "Mimikyu", "Snorlax", 
 	"Mew", "Arceus", "Lugia", "Umbreon", "Espeon"};
 
-//board colors
-inline vector<string> b_colors = {"Red", "Orange", "Yellow", "Green", "Blue", "Purple", 
-	"Pink", "White", "Black", "Brown"};
-
 const int SIZE {200};
 
 class SnowSport

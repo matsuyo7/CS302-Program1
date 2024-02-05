@@ -29,14 +29,6 @@ int main()
 	//create a seed for random number
 	srand(time(0));
 	
-	/*
-			shuffle_name(b_colors);
-			for (auto it = b_colors.begin(); it < b_colors.end(); ++it)
-			{
-				*it = (*it).c_str();
-				cout << "\nColor: " << *it << endl;
-
-			}*/
 	do
 	{
 		//menu option to pick sport
@@ -196,8 +188,6 @@ int racer_menu()
 //shuffle names
 int shuffle_name(vector<string> & r_names)
 {
-	//seed a random number from the time
-//	srand(time(0));
 	//size of the vector
 	size_t size = r_names.size();
 	for (size_t i = 0; i < size; ++i)
